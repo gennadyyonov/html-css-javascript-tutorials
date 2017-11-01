@@ -122,5 +122,38 @@
         </ul>
     </div>
 </div>
+
+<script>
+    const VALUES = [1, 2, 3, 4];
+
+    var cards;
+
+    function shuffle(array) {
+        for (var i = array.length - 1; i > 0; i--) {
+            var index = Math.floor(Math.random() * (i + 1));
+            var temp = array[i];
+            array[i] = array[index];
+            array[index] = temp;
+        }
+    }
+
+    function deal() {
+        cards = [];
+        var values = [];
+        for (var i = 0; i < VALUES.length; i++) {
+            var value = VALUES[i];
+            values.push(value);
+            values.push(value);
+        }
+        shuffle(values);
+        for (i = 0; i < values.length; i++) {
+            var card = {value: values[i], opened: false};
+            cards.push(card);
+        }
+    }
+
+    deal();
+</script>
+
 </body>
 </html>
