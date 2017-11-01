@@ -90,25 +90,25 @@
 </head>
 <body><!-- Contains the visible page content -->
 <div>
-    <div class="warning">10 attempts left.</div><!-- Status Bar -->
+    <div id="statusBar" class="warning">10 attempts left.</div><!-- Status Bar -->
     <div><!-- Deck of Cards -->
         <table class="card-table">
             <tr>
-                <td class="card-cell close"></td>
-                <td class="card-cell close"></td>
-                <td class="card-cell open">1</td>
-                <td class="card-cell open">1</td>
+                <td id="card0" class="card-cell close"></td>
+                <td id="card1" class="card-cell close"></td>
+                <td id="card2" class="card-cell open">1</td>
+                <td id="card3" class="card-cell open">1</td>
             </tr>
             <tr>
-                <td class="card-cell close"></td>
-                <td class="card-cell open">2</td>
-                <td class="card-cell close"></td>
-                <td class="card-cell open">3</td>
+                <td id="card4" class="card-cell close"></td>
+                <td id="card5" class="card-cell open">2</td>
+                <td id="card6" class="card-cell close"></td>
+                <td id="card7" class="card-cell open">3</td>
             </tr>
         </table>
     </div>
     <div><!-- Button -->
-        <button class="button shadow-button">New Game</button>
+        <button class="button shadow-button" onclick="deal()">New Game</button>
     </div>
     <div class="info"><!-- Rules -->
         <strong>The rules for playing Memory Game</strong>
@@ -127,6 +127,8 @@
     const VALUES = [1, 2, 3, 4];
 
     var cards;
+
+    var statusBar = document.getElementById("statusBar");
 
     function shuffle(array) {
         for (var i = array.length - 1; i > 0; i--) {
@@ -149,7 +151,20 @@
         for (i = 0; i < values.length; i++) {
             var card = {value: values[i], opened: false};
             cards.push(card);
+            display({index: i, card: card});
         }
+        updateStatus("Go-go-go!")
+    }
+
+    function display(item) {
+        var index = item.index;
+        var card = item.card;
+        var element = document.getElementById("card" + index);
+        element.innerHTML = card.value;
+    }
+
+    function updateStatus(message) {
+        statusBar.innerHTML = message;
     }
 
     deal();
