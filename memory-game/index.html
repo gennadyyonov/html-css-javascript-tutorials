@@ -3,30 +3,114 @@
 <head><!-- Contains meta information about the document -->
     <meta charset="UTF-8">
     <title>Memory Game</title><!-- Specifies a title for the document -->
+    <style>
+        body {
+            font-family: Verdana, serif;
+            font-size: 13px;
+        }
+
+        /* Status Bar */
+        .warning, .info, .error, .success {
+            border: 1px solid;
+            /* margin and padding attributes are defined from top moving to the right */
+            margin: 10px 0;
+            padding: 15px 10px 15px 20px;
+        }
+
+        .warning {
+            color: #9F6000;
+            background-color: #FEEFB3;
+        }
+
+        .error {
+            color: #D8000C;
+            background-color: #FFBABA;
+        }
+
+        .success {
+            color: #4F8A10;
+            background-color: #DFF2BF;
+        }
+
+        /* Deck of Cards */
+        .card-table {
+            border-spacing: 10px;
+        }
+
+        .card-cell {
+            width: 125px;
+            height: 180px;
+            font-size: 50px;
+            text-align: center;
+            color: white;
+            border: 1px solid black;
+            border-radius: 10px;
+        }
+
+        .open {
+            background-color: darkorange;
+            transition: 500ms;
+        }
+
+        .close {
+            cursor: pointer;
+            background-color: cornflowerblue;
+            transition: 500ms;
+        }
+
+        /* Button */
+        .button {
+            font-size: 16px;
+            color: white;
+            background-color: cornflowerblue;
+            border: none;
+            padding: 15px 32px;
+            margin: 4px 10px;
+            cursor: pointer;
+            transition-duration: 0.5s;
+            border-radius: 10px;
+        }
+
+        /* Removes blue border from css custom-styled button in Chrome after click */
+        .button:focus {
+            outline: 0;
+        }
+
+        /* box-shadow: none|h-shadow v-shadow blur spread color |inset|initial|inherit; */
+        .shadow-button:hover {
+            box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+        }
+
+        /* Rules */
+        .info {
+            color: #00529B;
+            background-color: #BDE5F8;
+        }
+    </style>
 </head>
 <body><!-- Contains the visible page content -->
 <div>
-    <div>10 attempts left.</div><!-- Status Bar -->
+    <div class="warning">10 attempts left.</div><!-- Status Bar -->
     <div><!-- Deck of Cards -->
-        <table>
+        <table class="card-table">
             <tr>
-                <td>0</td>
-                <td>0</td>
-                <td>1</td>
-                <td>1</td>
+                <td class="card-cell close"></td>
+                <td class="card-cell close"></td>
+                <td class="card-cell open">1</td>
+                <td class="card-cell open">1</td>
             </tr>
             <tr>
-                <td>2</td>
-                <td>2</td>
-                <td>3</td>
-                <td>3</td>
+                <td class="card-cell close"></td>
+                <td class="card-cell open">2</td>
+                <td class="card-cell close"></td>
+                <td class="card-cell open">3</td>
             </tr>
         </table>
     </div>
     <div><!-- Button -->
-        <button>New Game</button>
+        <button class="button shadow-button">New Game</button>
     </div>
-    <div><!-- Rules -->
+    <div class="info"><!-- Rules -->
         <strong>The rules for playing Memory Game</strong>
         <ul>
             <li>Cards are mixed up and laid in rows, face down.</li>
