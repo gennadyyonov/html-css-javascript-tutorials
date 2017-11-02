@@ -94,16 +94,16 @@
     <div><!-- Deck of Cards -->
         <table class="card-table">
             <tr>
-                <td id="card0" class="card-cell close"></td>
-                <td id="card1" class="card-cell close"></td>
-                <td id="card2" class="card-cell open">1</td>
-                <td id="card3" class="card-cell open">1</td>
+                <td id="card0" class="card-cell close" onclick="turn(0)"></td>
+                <td id="card1" class="card-cell close" onclick="turn(1)"></td>
+                <td id="card2" class="card-cell open" onclick="turn(2)">1</td>
+                <td id="card3" class="card-cell open" onclick="turn(3)">1</td>
             </tr>
             <tr>
-                <td id="card4" class="card-cell close"></td>
-                <td id="card5" class="card-cell open">2</td>
-                <td id="card6" class="card-cell close"></td>
-                <td id="card7" class="card-cell open">3</td>
+                <td id="card4" class="card-cell close" onclick="turn(4)"></td>
+                <td id="card5" class="card-cell open" onclick="turn(5)">2</td>
+                <td id="card6" class="card-cell close" onclick="turn(6)"></td>
+                <td id="card7" class="card-cell open" onclick="turn(7)">3</td>
             </tr>
         </table>
     </div>
@@ -127,6 +127,7 @@
     const VALUES = [1, 2, 3, 4];
 
     var cards;
+    var selected;
 
     var statusBar = document.getElementById("statusBar");
 
@@ -141,6 +142,7 @@
 
     function deal() {
         cards = [];
+        selected = null;
         var values = [];
         for (var i = 0; i < VALUES.length; i++) {
             var value = VALUES[i];
@@ -156,11 +158,37 @@
         updateStatus("Go-go-go!");
     }
 
+    function turn(index) {
+        var card = cards[index];
+        if (card.opened) {
+            return;
+        }
+        card.opened = true;
+        display({index: index, card: card});
+        if (selected === null) {
+            selected = {index: index, card: card};
+        } else {
+            if (selected.card.value !== card.value) {
+                selected.card.opened = false;
+                card.opened = false;
+                var lh = selected;
+                var rh = {index: index, card: card};
+                setTimeout(function () {
+                    display(lh);
+                    display(rh);
+                }, 700);
+            }
+            selected = null;
+        }
+    }
+
     function display(item) {
         var index = item.index;
         var card = item.card;
         var element = document.getElementById("card" + index);
-        element.innerHTML = card.value;
+        element.classList.remove(card.opened ? "close" : "open");
+        element.classList.add(card.opened ? "open" : "close");
+        element.innerHTML = card.opened ? card.value : "";
     }
 
     function updateStatus(message) {
