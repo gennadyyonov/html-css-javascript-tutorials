@@ -126,8 +126,11 @@
 <script>
     const VALUES = [1, 2, 3, 4];
 
+    const MAX_NUMBER_OF_ATTEMPTS = 10;
+
     var cards;
     var selected;
+    var attempt;
 
     var statusBar = document.getElementById("statusBar");
 
@@ -143,6 +146,7 @@
     function deal() {
         cards = [];
         selected = null;
+        attempt = 0;
         var values = [];
         for (var i = 0; i < VALUES.length; i++) {
             var value = VALUES[i];
@@ -151,16 +155,16 @@
         }
         shuffle(values);
         for (i = 0; i < values.length; i++) {
-            var card = {value: values[i], opened: false};
+            var card = {value: values[i], opened: false, locked: false};
             cards.push(card);
             display({index: i, card: card});
         }
-        updateStatus("Go-go-go!", "warning");
+        updateProgress(MAX_NUMBER_OF_ATTEMPTS)
     }
 
     function turn(index) {
         var card = cards[index];
-        if (card.opened) {
+        if (card.opened || card.locked) {
             return;
         }
         card.opened = true;
@@ -169,6 +173,7 @@
             selected = {index: index, card: card};
         } else {
             if (selected.card.value !== card.value) {
+                attempt += 1;
                 selected.card.opened = false;
                 card.opened = false;
                 var lh = selected;
@@ -184,9 +189,19 @@
     }
 
     function gameOver() {
-        for (var i = 0; i < cards.length; i++) {
+        var i;
+        var left = MAX_NUMBER_OF_ATTEMPTS - attempt;
+        if (left <= 0) {
+            for (i = 0; i < cards.length; i++) {
+                cards[i].locked = true;
+            }
+            updateStatus("You Loose...", "error");
+            return;
+        }
+        for (i = 0; i < cards.length; i++) {
             var card = cards[i];
             if (!card.opened) {
+                updateProgress(left);
                 return;
             }
         }
@@ -200,6 +215,10 @@
         element.classList.remove(card.opened ? "close" : "open");
         element.classList.add(card.opened ? "open" : "close");
         element.innerHTML = card.opened ? card.value : "";
+    }
+
+    function updateProgress(left) {
+        updateStatus(left + " attempts left.", "warning");
     }
 
     function updateStatus(message, clazz) {
