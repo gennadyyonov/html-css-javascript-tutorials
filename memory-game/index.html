@@ -155,7 +155,7 @@
             cards.push(card);
             display({index: i, card: card});
         }
-        updateStatus("Go-go-go!");
+        updateStatus("Go-go-go!", "warning");
     }
 
     function turn(index) {
@@ -179,7 +179,18 @@
                 }, 700);
             }
             selected = null;
+            gameOver();
         }
+    }
+
+    function gameOver() {
+        for (var i = 0; i < cards.length; i++) {
+            var card = cards[i];
+            if (!card.opened) {
+                return;
+            }
+        }
+        updateStatus("You Win!", "success");
     }
 
     function display(item) {
@@ -191,7 +202,12 @@
         element.innerHTML = card.opened ? card.value : "";
     }
 
-    function updateStatus(message) {
+    function updateStatus(message, clazz) {
+        var classList = statusBar.classList;
+        while (classList.length > 0) {
+            classList.remove(classList.item(0));
+        }
+        statusBar.classList.add(clazz);
         statusBar.innerHTML = message;
     }
 
