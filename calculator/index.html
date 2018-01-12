@@ -3,99 +3,98 @@
 <head>
     <meta charset="UTF-8">
     <title>Calculator</title>
+    <link rel="stylesheet" href="css/calculator.css">
 </head>
 <body>
 
-<table border="1">
+<table>
     <tr>
         <td colspan="4">
-            <label>
-                <input type="text">
-            </label>
+            <div id="screen">0</div>
         </td>
     </tr>
     <tr>
         <td>
-            <div>%</div>
+            <div class="operator button">&percnt;</div>
         </td>
         <td>
-            <div>&radic;</div>
+            <div class="formula button">&radic;</div>
         </td>
         <td>
-            <div>x&sup2;</div>
+            <div class="formula button">x&sup2;</div>
         </td>
         <td>
-            <div>1/x</div>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <div>CE</div>
-        </td>
-        <td>
-            <div>C</div>
-        </td>
-        <td>
-            <div></div>
-        </td>
-        <td>
-            <div>&divide;</div>
+            <div class="formula button"><sup>1</sup>&#8725;x</div>
         </td>
     </tr>
     <tr>
         <td>
-            <div>7</div>
+            <div class="operator button">CE</div>
         </td>
         <td>
-            <div>8</div>
+            <div class="operator button">C</div>
         </td>
         <td>
-            <div>9</div>
+            <div class="operator button">&lArr;</div>
         </td>
         <td>
-            <div>&times;</div>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <div>4</div>
-        </td>
-        <td>
-            <div>5</div>
-        </td>
-        <td>
-            <div>6</div>
-        </td>
-        <td>
-            <div></div>
+            <div class="operator button">&divide;</div>
         </td>
     </tr>
     <tr>
         <td>
-            <div>1</div>
+            <div class="number button">7</div>
         </td>
         <td>
-            <div>2</div>
+            <div class="number button">8</div>
         </td>
         <td>
-            <div>3</div>
+            <div class="number button">9</div>
         </td>
         <td>
-            <div>+</div>
+            <div class="operator button">&times;</div>
         </td>
     </tr>
     <tr>
         <td>
-            <div>&plusmn;</div>
+            <div class="number button">4</div>
         </td>
         <td>
-            <div>0</div>
+            <div class="number button">5</div>
         </td>
         <td>
-            <div>.</div>
+            <div class="number button">6</div>
         </td>
         <td>
-            <div>=</div>
+            <div class="operator button">&minus;</div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div class="number button">1</div>
+        </td>
+        <td>
+            <div class="number button">2</div>
+        </td>
+        <td>
+            <div class="number button">3</div>
+        </td>
+        <td>
+            <div class="operator button">&plus;</div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div class="operator button">&plusmn;</div>
+        </td>
+        <td>
+            <div class="number button">0</div>
+        </td>
+        <td>
+            <div class="number button">.</div>
+        </td>
+        <td>
+            <div class="operator button">&equals;</div>
         </td>
     </tr>
 </table>
