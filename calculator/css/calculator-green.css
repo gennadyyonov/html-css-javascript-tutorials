@@ -1,0 +1,12 @@
+#calculator {
+    border: 1px solid darkgreen;
+    background-color: rgb(238, 255, 241);
+}
+
+.key {
+    background-color: rgb(215, 241, 217);
+}
+
+.operator, .formula {
+    background-color: rgb(168, 227, 173);
+}
