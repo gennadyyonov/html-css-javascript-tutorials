@@ -2,6 +2,10 @@ body {
     font-family: Arial, sans-serif;
 }
 
+.container {
+    margin-top: 10px;
+}
+
 #calculator {
     border-spacing: 4px;
 }

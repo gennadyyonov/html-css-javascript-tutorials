@@ -3,10 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <title>Calculator</title>
-    <link rel="stylesheet" href="css/calculator-base.css">
-    <link rel="stylesheet" href="css/calculator-yellow.css">
+    <link rel="stylesheet" href="css/windows-calculator.css">
 </head>
 <body>
+<div class="container">
+    <label>Select Stylesheet:
+        <select id="stylesheetSelect" onchange="selectStylesheet()">
+            <option>Windows</option>
+            <option>Green</option>
+            <option>Red</option>
+            <option>Yellow</option>
+        </select>
+    </label>
+</div>
 <div class="container">
     <table id="calculator">
         <tr>
@@ -103,5 +112,50 @@
         </tr>
     </table>
 </div>
+
+<script>
+
+    function selectStylesheet() {
+        var stylesheetSelect = document.getElementById("stylesheetSelect");
+        var i = stylesheetSelect.selectedIndex;
+        var selectedOption = stylesheetSelect.options[i].text;
+        if (selectedOption === 'Windows') {
+            removeAllStyleSheets();
+            linkStylesheet('calculator-windows', 'css/windows-calculator.css');
+        } else if (selectedOption === 'Green') {
+            removeAllStyleSheets();
+            linkStylesheet('calculator-base', 'css/calculator-base.css');
+            linkStylesheet('calculator-green', 'css/calculator-green.css');
+        } else if (selectedOption === 'Red') {
+            removeAllStyleSheets();
+            linkStylesheet('calculator-base', 'css/calculator-base.css');
+            linkStylesheet('calculator-red', 'css/calculator-red.css');
+        } else if (selectedOption === 'Yellow') {
+            removeAllStyleSheets();
+            linkStylesheet('calculator-base', 'css/calculator-base.css');
+            linkStylesheet('calculator-yellow', 'css/calculator-yellow.css');
+        }
+    }
+
+    function removeAllStyleSheets() {
+        var elements = document.getElementsByTagName('link');
+        while (elements[0]) {
+            elements[0].parentNode.removeChild(elements[0])
+        }
+    }
+
+    function linkStylesheet(cssId, href) {
+        if (!document.getElementById(cssId)) {
+            var head = document.getElementsByTagName('head')[0];
+            var link = document.createElement('link');
+            link.id = cssId;
+            link.rel = 'stylesheet';
+            link.type = 'text/css';
+            link.href = href;
+            link.media = 'all';
+            head.appendChild(link);
+        }
+    }
+</script>
 </body>
 </html>
